@@ -23,25 +23,33 @@ export function convertToIpa(conversionObject) {
     const input = document.getElementById("input-english").value;
     const inputWords = input.trim().split(/\s+/);
 
-    console.log(inputWords);
-
     if (inputWords) {
       const result = conversionObject.data;
       const matchingWords = [];
 
       inputWords.forEach((word) => {
-        const matchingRow = result.find(row => row[0] === word.toUpperCase());
-        console.log(matchingRow);
+        const strippedWord = word.replace(/[.,/'#!$%^&*;:{}=\-_`~()]/g, "");
+        const matchingRows = result.filter(row => row[0] === strippedWord.toUpperCase());
 
-        if (matchingRow) {
-          matchingWords.push(matchingRow[3].toLowerCase());
+        if (matchingRows.length > 0) {
+          const uniqueMatchingRows = [];
+
+          matchingRows.forEach((row) => {
+            const isUnique = !uniqueMatchingRows.some((uniqueRow) => uniqueRow[3] === row[3]);
+
+            if (isUnique) {
+              uniqueMatchingRows.push(row)
+            }
+          });
+
+          matchingWords.push("(" + uniqueMatchingRows.map(row => row[3].toLowerCase()) + ") ");
+
         } else {
           throw new WordNotFoundError(word)
         }
       });
 
-      console.log(matchingWords);
-      return matchingWords.join(" ");
+      return matchingWords.join("");
 
     } else {
       throw new Error("No input found");
@@ -69,7 +77,8 @@ export function convertToEnglish(conversionObject) {
       const matchingWords = [];
     
       inputWords.forEach((word) => {
-        const matchingRows = result.filter(row => row[3] === word);
+        const strippedWord = word.replace(/[.,/'#!$%^&*;:{}=\-_`~()]/g, "");
+        const matchingRows = result.filter(row => row[3] === strippedWord);
     
         if (matchingRows.length > 0) {
           const uniqueMatchingRows = [];
@@ -81,14 +90,14 @@ export function convertToEnglish(conversionObject) {
             }
           });
     
-          matchingWords.push("(" + uniqueMatchingRows.map(row => row[0].toLowerCase()) + ")");
+          matchingWords.push("(" + uniqueMatchingRows.map(row => row[0].toLowerCase()).join(", ") + ") ");
+
         } else {
           throw new WordNotFoundError(word);
         }
       });
     
-      console.log(matchingWords);
-      return matchingWords.join(" ");
+      return matchingWords.join("");
 
     } else {
       throw new Error("No input found");

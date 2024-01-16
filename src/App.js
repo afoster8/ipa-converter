@@ -62,7 +62,7 @@ function App({ json }) {
           <p> Input English, output IPA! </p>
 
           <div className="input-container">
-            <input type="text" id="input-english"></input>
+            <input type="text" id="input-english" maxLength={200}></input>
             <button onClick={() => handleConvertClick("english-input")}>Convert</button>
           </div>
 
@@ -83,7 +83,7 @@ function App({ json }) {
           <p> Input IPA, output English! </p>
 
           <div className="input-container">
-            <input type="text" id="input-ipa"></input>
+            <input type="text" id="input-ipa" maxLength={200}></input>
             <button onClick={() => handleConvertClick("ipa-input")}>Convert</button>
           </div>
 
@@ -103,7 +103,10 @@ function App({ json }) {
 
         <br />
       </div>
-      <p>Uses the <a href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict">CMU Pronouncing Dictionary</a> as a resource for ARPAbet mappings. </p>
+      <p>Note that there is not a one-to-one mapping of IPA to English words and vice versa, and there may be some homonym/homophone imprecision that you may need to work out yourself.</p>
+      <p>There is some stripping of punctuation built into the converter, but if you get word-not-found errors, check for extra punctuation to see if that resolves it. </p>
+      <p>If a word you know exists in English is not found in the mapping, sorry! Try <a href="https://www.wiktionary.org">Wiktionary</a> as another source!</p>
+      <p>Uses the <a href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict">CMU Pronouncing Dictionary</a> as a resource for ARPAbet mappings and word list. </p>
     </div>
   );
 }
