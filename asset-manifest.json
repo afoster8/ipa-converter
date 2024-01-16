@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/ipa-converter/static/css/main.3a3d23d7.css",
-    "main.js": "/ipa-converter/static/js/main.55009046.js",
+    "main.js": "/ipa-converter/static/js/main.f7b3c10b.js",
     "index.html": "/ipa-converter/index.html",
     "main.3a3d23d7.css.map": "/ipa-converter/static/css/main.3a3d23d7.css.map",
-    "main.55009046.js.map": "/ipa-converter/static/js/main.55009046.js.map"
+    "main.f7b3c10b.js.map": "/ipa-converter/static/js/main.f7b3c10b.js.map"
   },
   "entrypoints": [
     "static/css/main.3a3d23d7.css",
-    "static/js/main.55009046.js"
+    "static/js/main.f7b3c10b.js"
   ]
 }
